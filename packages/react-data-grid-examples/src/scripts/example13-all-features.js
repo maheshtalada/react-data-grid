@@ -2,7 +2,7 @@ const faker = require('faker');
 const ReactDataGrid = require('react-data-grid');
 const exampleWrapper = require('../components/exampleWrapper');
 const React = require('react');
-const { Editors, Toolbar, Formatters } = require('react-data-grid-addons');
+const { Editors, Toolbar, Formatters } = require('../../../react-data-grid-addons');
 import update from 'immutability-helper';
 const { AutoComplete: AutoCompleteEditor, DropDownEditor } = Editors;
 const { ImageFormatter } = Formatters;
@@ -53,6 +53,18 @@ const counties = [
 ];
 
 const titles = ['Dr.', 'Mr.', 'Mrs.', 'Miss', 'Ms.'];
+
+const sampleClick = ()=> {
+  console.log('333')
+}
+
+const Sample1  = ({label}) => {
+  return (<button type="button" className="btn" onClick={sampleClick}>{label}</button>)
+};
+
+const Sample2  = ({label}) => {
+  return (<button type="button" className="btn" onClick={sampleClick}>{label}</button>)
+};
 
 class Example extends React.Component {
   constructor(props, context) {
@@ -168,7 +180,7 @@ class Example extends React.Component {
 
   createRows = (numberOfRows) => {
     let rows = [];
-    for (let i = 0; i < numberOfRows; i++) {
+    for (let i = 0; i < 5; i++) {
       rows[i] = this.createFakeRowObjectData(i);
     }
     return rows;
@@ -228,7 +240,8 @@ class Example extends React.Component {
     };
 
     let rows = this.state.rows.slice();
-    rows = update(rows, {$push: [newRow]});
+    rows.splice(0,0, newRow);
+    //rows = update(rows, {$push: [newRow]});
     this.setState({ rows });
   };
 
@@ -253,7 +266,7 @@ class Example extends React.Component {
         rowGetter={this.getRowAt}
         rowsCount={this.getSize()}
         onGridRowsUpdated={this.handleGridRowsUpdated}
-        toolbar={<Toolbar onAddRow={this.handleAddRow}/>}
+        toolbar={<Toolbar onAddRow={this.handleAddRow} customToolbars={[<Sample1 label="sample1" />, <Sample2 label="sample2" />]}/>}
         enableRowSelect={true}
         rowHeight={50}
         minHeight={600}

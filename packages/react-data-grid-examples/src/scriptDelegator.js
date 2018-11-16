@@ -9,7 +9,7 @@ var loadScript = function(src) {
 };
 
 var delegateScript = function(fileName) {
-  var src = (isDevEnv() ? 'http://localhost:8080/' : 'dist/') + fileName;
+  var src = (isDevEnv() ? 'http://localhost:8053/' : 'dist/') + fileName;
   loadScript(src);
 };
 

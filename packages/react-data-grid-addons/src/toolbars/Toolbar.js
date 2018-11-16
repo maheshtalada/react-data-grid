@@ -10,13 +10,15 @@ class Toolbar extends React.Component {
     numberOfRows: PropTypes.number,
     addRowButtonText: PropTypes.string,
     filterRowsButtonText: PropTypes.string,
-    children: PropTypes.any
+    children: PropTypes.any,
+    customToolbars: PropTypes.array
   };
 
   static defaultProps = {
     enableAddRow: true,
     addRowButtonText: 'Add Row',
-    filterRowsButtonText: 'Filter Rows'
+    filterRowsButtonText: 'Filter Rows',
+    customToolbars : []
   };
 
   onAddRow = () => {
@@ -41,10 +43,16 @@ class Toolbar extends React.Component {
     }
   };
 
+  renderCustomToolBars() {
+    const { customToolbars } = this.props;
+    return customToolbars.map( Component => (Component));
+  }
+
   render() {
     return (
       <div className="react-grid-Toolbar">
         <div className="tools">
+          {this.renderCustomToolBars()}
           {this.renderAddRowButton()}
           {this.renderToggleFilterButton()}
           {this.props.children}

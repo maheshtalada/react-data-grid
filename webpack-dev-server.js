@@ -26,16 +26,17 @@ const specificConfig =  {
 
 const config =  Object.assign({ }, webpackCommon, specificConfig);
 
-config.entry.index.unshift('webpack-dev-server/client?http://localhost:8080/', 'webpack/hot/dev-server');
+config.entry.index.unshift('webpack-dev-server/client?http://localhost:8053/', 'webpack/hot/dev-server');
 
 const compiler = webpack(config);
 const server = new WebpackDevServer(compiler, {
+  watch : true,
   hot: true,
   open: true,
   contentBase: 'packages/react-data-grid-examples/src'
 });
 
-server.listen(8080, () => {
+server.listen(8053, () => {
   const open = require('open');
-  open('http://localhost:8080/webpack-dev-server/');
+  open('http://localhost:8053/webpack-dev-server/');
 });
